@@ -4,10 +4,11 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Clock, ChevronLeft, ChevronRight, CheckCircle2, XCircle } from "lucide-react";
+import { Clock, ChevronLeft, ChevronRight, CheckCircle2, XCircle, AlertCircle } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useSearch } from "wouter";
 
 interface Question {
   id: number;
@@ -18,6 +19,7 @@ interface Question {
 
 export default function Assessments() {
   const { toast } = useToast();
+  const searchString = useSearch();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [timeRemaining, setTimeRemaining] = useState(1800);
@@ -27,6 +29,11 @@ export default function Assessments() {
     totalQuestions: number;
     percentage: number;
   } | null>(null);
+  
+  const params = new URLSearchParams(searchString);
+  const assessmentId = params.get('assessmentId') || 'demo-assessment';
+  const studentId = params.get('studentId') || 'demo-student';
+  const isDemoMode = !params.get('assessmentId') || !params.get('studentId');
 
   const questions: Question[] = [
     {
@@ -68,8 +75,8 @@ export default function Assessments() {
     mutationFn: async () => {
       const score = questions.filter((q) => answers[q.id] === q.correctAnswer).length;
       const result = {
-        assessmentId: "demo-assessment",
-        studentId: "demo-student",
+        assessmentId,
+        studentId,
         answers: JSON.stringify(answers),
         score,
         totalQuestions: questions.length,
@@ -254,6 +261,21 @@ export default function Assessments() {
       </header>
 
       <main className="container mx-auto px-4 py-8 max-w-3xl">
+        {isDemoMode && (
+          <Card className="mb-6 border-warning">
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="h-5 w-5 text-warning mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-warning">Demo Mode</h3>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    No student or assessment ID provided. Use URL parameters ?assessmentId=xxx&studentId=xxx to link this to actual data.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
         <Card>
           <CardHeader>
             <div className="flex items-start justify-between">
