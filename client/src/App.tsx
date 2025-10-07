@@ -10,6 +10,7 @@ import LiveHeatmap from "@/pages/LiveHeatmap";
 import DeviceHub from "@/pages/DeviceHub";
 import StudentDashboard from "@/pages/StudentDashboard";
 import Assessments from "@/pages/Assessments";
+import Students from "@/pages/Students";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/heatmap" component={LiveHeatmap} />
       <Route path="/devices" component={DeviceHub} />
       <Route path="/student" component={StudentDashboard} />
+      <Route path="/students" component={Students} />
       <Route path="/assessments" component={Assessments} />
       <Route component={NotFound} />
     </Switch>

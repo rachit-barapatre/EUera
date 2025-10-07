@@ -9,9 +9,9 @@ export default function Navbar() {
   const navItems = [
     { path: "/", label: "Home", icon: Home },
     { path: "/teacher", label: "Teacher", icon: LayoutDashboard },
+    { path: "/students", label: "Students", icon: User },
     { path: "/heatmap", label: "Heatmap", icon: Activity },
     { path: "/devices", label: "Devices", icon: Radio },
-    { path: "/student", label: "Student", icon: User },
     { path: "/assessments", label: "Assessments", icon: FileCheck },
   ];
 
