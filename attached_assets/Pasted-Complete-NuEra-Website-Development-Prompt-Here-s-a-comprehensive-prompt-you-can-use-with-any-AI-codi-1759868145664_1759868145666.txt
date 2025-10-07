@@ -1,0 +1,390 @@
+Complete NuEra Website Development Prompt
+Here's a comprehensive prompt you can use with any AI coding assistant (Bolt, Replit, Lovable, etc.) to build your fully functional NuEra platform:
+
+🚀 PROMPT: Build NuEra - Cognitive Assessment Platform
+Project Overview
+Create a modern, eye-catching web application called "NuEra" - a New Era of Assessments that integrates IoT cognitive tracking with traditional learning management. The platform should have an inspiring, educational-tech aesthetic with excellent UX.
+
+🎨 Design Requirements
+Color Palette:
+
+Primary: #6366F1 (Indigo)
+
+Secondary: #10B981 (Emerald)
+
+Accent: #8B5CF6 (Violet)
+
+Background: #F8FAFC (Light Slate)
+
+Text: #1E293B (Slate)
+
+Success: #22C55E (Green)
+
+Warning: #F59E0B (Amber)
+
+Error: #EF4444 (Red)
+
+…
+[12:35 AM, 10/8/2025] Amit KU: NuEra — Full Website Development Prompt
+
+Goal: A single, copy-pastable, production-ready prompt for any AI coding assistant (Bolt, Replit, Lovable, GitHub Copilot, etc.) to build the NuEra — a modern cognitive assessment & IoT-integrated learning platform.
+
+1) Project Summary
+
+NuEra (New Era of Assessments) is a responsive web application that fuses traditional LMS features with real-time IoT cognitive tracking. The site should look modern, educational-tech, and accessible. Prioritize usability, performance, mobile-first responsive layout, and easy IoT integration.
+
+Primary Objectives
+
+Teacher-facing dashboards for class management and live cognitive monitoring
+
+Student-facing analytics and personal dashboards
+
+Test/Assessment UI with pacing and cognitive indicators
+
+Device Integration hub to connect and manage IoT cognitive sensors
+
+Real-time features via WebSocket, secure REST API, JWT auth
+
+2) Design System (exact tokens)
+
+Colors
+
+Primary: #6366F1 (Indigo)
+
+Secondary: #10B981 (Emerald)
+
+Accent: #8B5CF6 (Violet)
+
+Background: #F8FAFC (Light Slate)
+
+Text: #1E293B (Slate)
+
+Success: #22C55E (Green)
+
+Warning: #F59E0B (Amber)
+
+Error: #EF4444 (Red)
+
+Typography
+
+Headings & Body: Inter (system fallback: Inter, system-ui, -apple-system)
+
+Monospace: JetBrains Mono for code samples/blocks
+
+Design Guidelines
+
+Layout: ample white space, 12pt baseline grid
+
+Effects: glassmorphism cards, subtle gradient accents, micro-interactions
+
+Animations: use Framer Motion for primary transitions and subtle hover interactions
+
+Accessibility: >4.5:1 contrast for important text, keyboard focus states for interactive controls
+
+3) Tech Stack (explicit)
+
+Frontend
+
+React 18 + TypeScript
+
+Vite (recommended) or Next.js (opt-in for SSR)
+
+Tailwind CSS (configured with the color tokens above)
+
+Framer Motion
+
+Chart.js via react-chartjs-2
+
+React Query (TanStack Query) for data fetching + caching
+
+Zustand (optional) for local UI state
+
+Backend (optional, but include API contract)
+
+Node.js (18+) + TypeScript
+
+Express (or Fastify) for REST endpoints
+
+WebSocket (ws or Socket.IO) for real-time events
+
+PostgreSQL (or MongoDB) for persistence
+
+Redis for ephemeral/session data and pub/sub for device streams
+
+JWT for authentication
+
+Dev / infra
+
+Docker for local development
+
+GitHub Actions for CI/CD
+
+Vercel / Netlify for frontend deployment, Heroku / Railway / DigitalOcean for backend
+
+Optional: Push notifications via Firebase
+
+4) Project Structure (explicit, TypeScript-ready)
+nuera/
+│       ├── app/
+│       │   └── routes.tsx
+│       ├── components/
+│       │   ├── dashboard/
+│       │   │   ├── StatsCards.tsx
+│       │   │   ├── ClassroomGrid.tsx
+│       │   │   └── QuickActions.tsx
+│       │   ├── cognitive/
+│       │   │   ├── Heatmap.tsx
+│       │   │   ├── AIInsights.tsx
+│       │   │   └── RealTimeGraph.tsx
+│       │   ├── charts/
+│       │   │   ├── RadarChart.tsx
+│       │   │   └── ProgressLine.tsx
+│       │   └── ui/
+│       │       ├── AnimatedCard.tsx
+│       │       ├── FixItAllCard.tsx     // enhanced card
+│       │       └── LoadingSkeleton.tsx
+│       ├── hooks/
+│       │   ├── useWebSocket.ts
+│       │   ├── useCognitiveData.ts
+│       │   └── useDeviceConnection.ts
+│       ├── pages/
+│       │   ├── Home.tsx
+│       │   ├── TeacherDashboard.tsx
+│       │   ├── CognitiveLabs.tsx
+│       │   ├── StudentAnalysis.tsx
+│       │   ├── Assessments.tsx
+│       │   └── DeviceHub.tsx
+│       └── styles/
+│           └── tailwind.css
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   ├── ws/
+│   │   └── index.ts
+│   └── Dockerfile
+└── infra/
+    └── deploy.yaml
+5) Key UI Components (behavior + props)
+
+StatsCards
+
+Props: { title, value, delta, icon, animation }
+
+Behavior: animated counter from 0 → value; delta shows arrow + color
+
+ClassroomGrid / Heatmap cell
+
+Props: { studentId, name, avatarUrl, cognitiveState, metrics }
+
+Behavior: fill color changes by cognitiveState (green/yellow/red), tooltip on hover, pulse animation on high cognitive load, click opens Student Drawer
+
+FixItAllCard (Enhanced card)
+
+Purpose: universal, multi-action card used across dashboards
+
+Features:
+
+Live status indicator (online/offline)
+
+Mini progress bar for ongoing tasks
+
+Live numeric indicator with animation
+
+Action buttons (primary/secondary) with hover and a settings dropdown
+
+Small chart sparkline (mini line)
+
+Props: { title, subtitle, state, progress, chartData, actions[] }
+
+Device Integration Card
+
+Shows battery, RSSI/signal, firmwareVersion, lastSeen timestamp
+
+Has 'Calibrate', 'Disconnect', 'Update Firmware' actions
+
+6) Pages & Feature Breakdown (user stories)
+Home
+
+Landing with hero, product benefits, CTA for teachers and institutions
+
+Teacher Dashboard
+
+Welcome header with teacher name
+
+Animated stats cards (students, avg cognitive score, assessments completed)
+
+Classroom/subject list (card view) with avatars
+
+Search students (debounced)
+
+Notifications bell with real-time alerts
+
+Quick actions for creating assessments, scheduling scans
+
+Classroom > Units > Live Heatmap > Student Details
+
+Drill down from Classroom to Units to Live Heatmap
+
+Live heatmap: grid of n students colored by state with tooltips
+
+Click a cell to show Student details drawer with: realtime metrics, historical chart, assessment history, alert actions
+
+Student Dashboard
+
+Left: profile picture, basic meta
+
+Right: name, subject, class/std, metrics preview
+
+Buttons: View Student Details, Add Student (+ icon) — visible to teachers/admins
+
+Interactive radar charts, trend lines, cognitive profile and downloadable report
+
+Assessments
+
+Subjects → Exams → Quizzes structure
+
+Clean test-taking UI: question pane, progress indicator, timer, auto-save, cognitive state indicator
+
+Admin flow: create/edit assessments, import question banks (CSV/JSON)
+
+Device Integration Hub
+
+Device status panel with real-time updates (connected/disconnected)
+
+Device list with battery/signal and stream stats
+
+Connection/Calibration wizard and firmware update flow
+
+WebSocket logs and simulated data play/pause for development
+
+7) Real-time & IoT Integration (API contracts & sample payloads)
+
+WebSocket channel
+
+Namespace: /ws/devices or socket.io('/devices')
+
+Events:
+
+device:connect → { deviceId, meta }
+
+device:status → { deviceId, battery, signal, firmwareVersion, lastSeen }
+
+cog:data → { deviceId, studentId, timestamp, metrics: { attention: number, engagement: number, stress: number }, cognitiveState: 'green'|'yellow'|'red' }
+
+alert → { level, studentId, reason, timestamp }
+
+REST endpoints (examples)
+
+POST /api/auth/login → Returns { token, user }
+
+GET /api/classes → [{ id, name, studentsCount, units: [] }]
+
+GET /api/students/:id → detailed profile and assessments
+
+GET /api/devices → list devices + status
+
+POST /api/devices/:id/calibrate → triggers calibration
+
+Sample cognitive payload
+
+{
+  "deviceId": "dev-001",
+  "studentId": "stu-123",
+  "timestamp": "2025-10-07T12:34:56.000Z",
+  "metrics": {"attention": 0.72, "engagement": 0.53, "stress": 0.20},
+  "cognitiveState": "yellow"
+}
+8) Security & Data Privacy
+
+Use HTTPS always
+
+JWT access tokens with short TTL; refresh tokens with rotate-and-revoke
+
+Role-based access control (teacher, admin, student)
+
+Encrypt sensitive fields at rest (PII)
+
+Audit logs for device data ingestion
+
+GDPR/Local compliance: allow data export & deletion per user
+
+9) Developer Deliverables (explicit checklist)
+
+Fully typed React + TypeScript frontend scaffold (Vite preferred)
+
+Tailwind configured with theme tokens and accessible components
+
+Example pages: Home, TeacherDashboard, CognitiveLabs, StudentAnalysis, Assessments, DeviceHub
+
+Reusable components: StatsCards, ClassroomGrid, Heatmap, FixItAllCard, DeviceCard
+
+Hooks: useWebSocket, useDeviceConnection, useCognitiveData with mock-mode toggles
+
+Backend stub with REST endpoints and WebSocket emulator for development (optional but recommended)
+
+Unit tests for critical components (Jest + React Testing Library)
+
+E2E sample tests using Playwright (1–2 flows: login + live heatmap)
+
+README with run/build/test commands, architecture diagram, and environment variables
+
+Deployment config and a GitHub Actions workflow for CI/CD
+
+Accessibility audit summary and fixes
+
+10) Implementation Notes (developer guidance)
+
+Build components mobile-first, then scale up to desktop using Tailwind responsive classes.
+
+Keep components small and well-typed; prefer composition over inheritance.
+
+Provide a mock environment variable and local WebSocket simulator for front-end development.
+
+For charts, animate transitions using Chart.js update with animation config; wrap with Framer Motion for entrance animations.
+
+Provide a FixItAllCard variant that can be dropped anywhere — include props to toggle mini-chart, badge, and actions.
+
+11) Acceptance Criteria (QA-ready)
+
+The Teacher Dashboard loads within 1.5s (cold) on a mid-range phone (emulated)
+
+Heatmap updates in <200ms after receiving a cog:data event
+
+DeviceHub shows battery and signal updates within 5s of server change
+
+All interactive elements are keyboard accessible and have focus styles
+
+Tests: component-level tests cover >60% logic for critical components
+
+12) Example commands (quick start)
+# Frontend (Vite + React + TS)
+npm create vite@latest nuera-frontend -- --template react-ts
+cd nuera-frontend
+npm install
+npm i tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+npm i framer-motion react-query chart.js react-chartjs-2 socket.io-client
+
+
+# Backend (Node + TS)
+mkdir backend && cd backend
+npm init -y
+npm i express socket.io jsonwebtoken bcryptjs pg
+npm i -D typescript ts-node-dev @types/express @types/node
+13) Extra: UX Copy & Microcopy (examples for UI)
+
+Live heatmap tooltip: "Real-time cognitive state — click for full profile"
+
+Calibration CTA: "Start guided calibration — 3 simple steps"
+
+FixItAllCard placeholder: "No active alerts — system running smoothly"
+
+14) Additions you asked to include (explicitly merged)
+
+Home — landing + CTA
+
+Teacher's Dashboard → Classrooms / Subjects → Units → Live heatmap → Student details (drill-down)
+
+Student's Dashboard → Left: student profile picture; Right:
